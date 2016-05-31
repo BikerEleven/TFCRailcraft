@@ -1,0 +1,7 @@
+
+# Creative tab groups
+itemGroup.tfclverailcraft=TFC Loves Railcraft
+
+# Items
+item.tfclverailcraft:servo.name=Servo
+item.tfclverailcraft:wirecore.name=Wire Core

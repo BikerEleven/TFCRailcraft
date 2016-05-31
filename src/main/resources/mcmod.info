@@ -1,0 +1,21 @@
+{
+  "modListVersion": 2,
+  "modList": [{
+    "modid": "tfclverailcraft",
+    "name": "TFC Railcraft",
+    "description": "A Railcraft Terrafirmacraft compatability addon",
+    "version": "${mod_version}",
+    "mcversion": "${minecraft_version}",
+    "url" : "https://github.com/bikereleven/TFCRailcraft",
+    "updateUrl": "",
+    "authorList": ["BikerEleven"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": "",
+    "requiredMods": ["Forge", "Railcraft", "terrafirmacraft"],
+    "dependencies": ["Forge@[10.13.4.1448,)","Railcraft", "terrafirmacraft"],
+    "dependants": [],
+    "useDependencyInformation": "true"
+  }]
+}
