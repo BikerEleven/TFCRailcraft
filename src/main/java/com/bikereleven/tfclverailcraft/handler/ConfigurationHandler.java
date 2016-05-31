@@ -13,6 +13,7 @@ public class ConfigurationHandler {
 
 	public static Configuration config;
 	public static Boolean powerMode = false;
+	public static Boolean disableRailcraftRecipes = true;
 
 	public static void init(File configFile) {
 
@@ -31,10 +32,13 @@ public class ConfigurationHandler {
 	}
 
 	private static void loadConfiguration() {
-		//Load config stuffs
-		
-		powerMode = config.getBoolean("powerMode", Configuration.CATEGORY_GENERAL, false, "If this is enabled then you are required to use the rolling machine.");
-		
+		// Load config stuffs
+
+		powerMode = config.getBoolean("powerMode", Configuration.CATEGORY_GENERAL, false,
+				"If this is enabled then you are required to use the rolling machine.");
+		disableRailcraftRecipes = config.getBoolean("disableRailcraftRecipes", Configuration.CATEGORY_GENERAL, true,
+				"This will disable railcraft recipes that disrupt terrafirmacraft progression");
+
 		if (config.hasChanged()) {
 			config.save();
 		}

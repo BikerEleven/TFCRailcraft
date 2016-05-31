@@ -4,4 +4,14 @@ itemGroup.tfclverailcraft=TFC Loves Railcraft
 
 # Items
 item.tfclverailcraft:servo.name=Servo
-item.tfclverailcraft:wirecore.name=Wire Core
+item.tfclverailcraft:wirecore.name=Wire core
+item.tfclverailcraft:fuelfurnace.name=Fuel furnace
+
+#TFC Gui
+gui.plans.standardrail=Standard Rail
+gui.plans.advrail=Advanced Rail
+gui.plans.hsrail=H.S. Rail
+gui.plans.steelrail=Reinforced Rail
+gui.plans.electricrail=Electric Rail
+gui.plans.rebar=Rebar
+gui.plans.wire=Wire Core

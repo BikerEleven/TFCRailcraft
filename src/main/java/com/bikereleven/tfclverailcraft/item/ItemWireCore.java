@@ -10,22 +10,10 @@ public class ItemWireCore extends TLRItem {
 	public ItemWireCore() {
 		super();
 		setUnlocalizedName("wirecore");
+		
 		maxStackSize = 16;
-	}
-
-	@Override
-	public boolean canStack() {
-		return true;
-	}
-
-	@Override
-	public EnumSize getSize(ItemStack iStack) {
-		return EnumSize.MEDIUM;
-	}
-
-	@Override
-	public EnumWeight getWeight(ItemStack iStack) {
-		return EnumWeight.HEAVY;
+		size = EnumSize.MEDIUM;
+		weight = EnumWeight.HEAVY;
 	}
 
 }

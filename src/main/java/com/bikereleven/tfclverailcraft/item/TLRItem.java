@@ -19,10 +19,15 @@ import net.minecraft.item.ItemStack;
 
 public class TLRItem extends Item implements ISize {
 
+	protected EnumItemReach reach = EnumItemReach.SHORT;
+	protected EnumWeight weight = EnumWeight.LIGHT;
+	protected EnumSize size = EnumSize.VERYSMALL;
+	
 	public TLRItem() {
 		super();
-		this.setCreativeTab(TLRCreativeTab.TLR_TAB);
-		this.maxStackSize = 1;
+		setCreativeTab(TLRCreativeTab.TLR_TAB);
+		maxStackSize = 1;
+		
 	}
 
 	@Override
@@ -55,22 +60,22 @@ public class TLRItem extends Item implements ISize {
 
 	@Override
 	public boolean canStack() {
-		return false;
+		return maxStackSize != 1;
 	}
 
 	@Override
 	public EnumItemReach getReach(ItemStack iStack) {
-		return EnumItemReach.MEDIUM;
+		return reach;
 	}
 
 	@Override
 	public EnumSize getSize(ItemStack iStack) {
-		return EnumSize.TINY;
+		return size;
 	}
 
 	@Override
 	public EnumWeight getWeight(ItemStack iStack) {
-		return EnumWeight.LIGHT;
+		return weight;
 	}
 
 }
