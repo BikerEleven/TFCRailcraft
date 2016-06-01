@@ -5,6 +5,8 @@ import java.util.List;
 import com.bikereleven.tfclverailcraft.client.creativetab.TLRCreativeTab;
 import com.bikereleven.tfclverailcraft.reference.Reference;
 import com.bioxx.tfc.Items.ItemTerra;
+import com.bioxx.tfc.Items.Tools.ItemCustomBucket;
+import com.bioxx.tfc.api.TFCItems;
 import com.bioxx.tfc.api.Enums.EnumItemReach;
 import com.bioxx.tfc.api.Enums.EnumSize;
 import com.bioxx.tfc.api.Enums.EnumWeight;
@@ -12,19 +14,26 @@ import com.bioxx.tfc.api.Interfaces.ISize;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mods.railcraft.common.fluids.Fluids;
+import mods.railcraft.common.fluids.ItemBucketRailcraft;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 
-public class TLRItem extends Item implements ISize {
+public class ItemWoodenCreoBucket extends ItemBucketRailcraft implements ISize {
 
 	protected EnumItemReach reach = EnumItemReach.SHORT;
 	protected EnumWeight weight = EnumWeight.LIGHT;
-	protected EnumSize size = EnumSize.VERYSMALL;
-	
-	public TLRItem() {
-		super();
+	protected EnumSize size = EnumSize.MEDIUM;
+	protected ItemStack container = new ItemStack(TFCItems.woodenBucketEmpty);
+
+	public ItemWoodenCreoBucket() {
+		super(Fluids.CREOSOTE.get());
+		
 		setCreativeTab(TLRCreativeTab.TLR_TAB);
 		maxStackSize = 1;
 		setUnlocalizedName("woodencreobucket");
@@ -35,7 +44,7 @@ public class TLRItem extends Item implements ISize {
 		return String.format("item.%s%s", Reference.RESOURCE_LOC_NAME,
 				getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
-	
+
 	public String getRawUnlocalizedName() {
 		return super.getUnlocalizedName();
 	}
@@ -51,6 +60,20 @@ public class TLRItem extends Item implements ISize {
 	public void registerIcons(IIconRegister iconRegister) {
 		itemIcon = iconRegister
 				.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf('.') + 1));
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack stack) {
+		return container.copy();
+	}
+	
+	public ItemStack getItemStack(){
+		return new ItemStack(this);
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		return stack;
 	}
 
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {

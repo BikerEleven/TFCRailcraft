@@ -4,8 +4,11 @@ itemGroup.tfclverailcraft=TFC Loves Railcraft
 
 # Items
 item.tfclverailcraft:servo.name=Servo
-item.tfclverailcraft:wirecore.name=Wire core
-item.tfclverailcraft:fuelfurnace.name=Fuel furnace
+item.tfclverailcraft:wirecore.name=Wire Core
+item.tfclverailcraft:fuelfurnace.name=Fuel Furnace
+item.tfclverailcraft:woodchestcart.name=Wooden Storage Cart
+item.tfclverailcraft:woodencreobucket.name=Wooden Bucket (Creosote)
+item.tfclverailcraft:steelcreobucket.name=Red Steel Bucket (Creosote)
 
 #TFC Gui
 gui.plans.standardrail=Standard Rail

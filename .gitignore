@@ -49,6 +49,7 @@ crashlytics-build.properties
 bin/
 libs/
 tmp/
+ref/
 *.tmp
 *.bak
 *.swp

@@ -11,6 +11,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 
 import com.bikereleven.tfclverailcraft.handler.ConfigurationHandler;
+import com.bikereleven.tfclverailcraft.init.ModEntities;
 import com.bikereleven.tfclverailcraft.init.ModItems;
 import com.bikereleven.tfclverailcraft.init.ModRecipes;
 import com.bikereleven.tfclverailcraft.proxy.IProxy;
@@ -32,6 +33,7 @@ public class TFCRailcraft {
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 
 		ModItems.init();
+		ModEntities.init();
 
 		LogHelper.info("Finished PreInit phase");
 	}
@@ -39,12 +41,12 @@ public class TFCRailcraft {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		ModRecipes.init();
-
+		proxy.registerRenderers();
 		LogHelper.info("Finished Init phase");
 	}
-	
+
 	@EventHandler
-	public void onServerStart(FMLServerStartedEvent event){
+	public void onServerStart(FMLServerStartedEvent event) {
 		LogHelper.info("Trying to inject anvil recipes");
 		ModRecipes.addAnvilRecipes();
 	}
