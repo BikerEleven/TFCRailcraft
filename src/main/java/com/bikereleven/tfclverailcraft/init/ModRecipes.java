@@ -37,9 +37,12 @@ import mods.railcraft.common.blocks.tracks.EnumTrack;
 import mods.railcraft.common.carts.EnumCart;
 import mods.railcraft.common.core.Railcraft;
 import mods.railcraft.common.fluids.Fluids;
+import mods.railcraft.common.items.ItemCircuit.EnumCircuit;
+import mods.railcraft.common.items.ItemGear.EnumGear;
 import mods.railcraft.common.items.ItemPlate.EnumPlate;
 import mods.railcraft.common.items.ItemRail.EnumRail;
 import mods.railcraft.common.items.ItemRailbed.EnumRailbed;
+import mods.railcraft.common.items.ItemTie.EnumTie;
 import mods.railcraft.common.items.Metal;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -73,10 +76,10 @@ public class ModRecipes {
 
 	private static void addBarrelRecipes() {
 
-		ItemStack woodenTie = GameRegistry.findItemStack("Railcraft", "part.tie", 1);
+		ItemStack woodenTie = RailcraftItem.tie.getStack(EnumTie.WOOD);
 		ItemStack creosoteWood = EnumCube.CREOSOTE_BLOCK.getItem();
-
 		FluidStack creosote = new FluidStack(Fluids.CREOSOTE.get(), 625);
+
 		BarrelManager.getInstance()
 				.addRecipe(new BarrelRecipe(new ItemStack(TFCItems.singlePlank, 1, OreDictionary.WILDCARD_VALUE),
 						creosote, woodenTie, creosote).setMinTechLevel(0));
@@ -91,7 +94,7 @@ public class ModRecipes {
 		AnvilManager manager = AnvilManager.getInstance();
 
 		manager.addPlan("servo", new PlanRecipe(
-				new RuleEnum[] { RuleEnum.UPSETANY, RuleEnum.HITSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST }));
+				new RuleEnum[] { RuleEnum.UPSETLAST, RuleEnum.HITSECONDFROMLAST, RuleEnum.BENDTHIRDFROMLAST }));
 		manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronIngot), new ItemStack(TFCItems.copperSheet),
 				"servo", false, AnvilReq.COPPER, new ItemStack(ModItems.servo)));
 
@@ -116,7 +119,7 @@ public class ModRecipes {
 					new ItemStack(TFCItems.wroughtIronIngot), "standardrail", false, AnvilReq.WROUGHTIRON,
 					RailcraftItem.rail.getStack(8, EnumRail.STANDARD)));
 			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.goldSheet), RailcraftItem.rail.getStack(),
-					"advrail", false, AnvilReq.WROUGHTIRON, RailcraftItem.rail.getStack(8, EnumRail.ADVANCED)));
+					"advrail", false, AnvilReq.WROUGHTIRON, RailcraftItem.rail.getStack(3, EnumRail.ADVANCED)));
 			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.steelIngot), new ItemStack(TFCItems.goldIngot),
 					"hsrail", false, AnvilReq.WROUGHTIRON, RailcraftItem.rail.getStack(8, EnumRail.SPEED)));
 			manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.wroughtIronIngot),
@@ -179,10 +182,10 @@ public class ModRecipes {
 				'P', "plateSteel", 'B', "bucketEmpty", 'I', new ItemStack(Blocks.iron_bars), 'S',
 				new ItemStack(TFCItems.powder, 1, 3), 'H', new ItemStack(ModItems.fuelFurnace)));
 
-		// Fix the steel(2) gear, gold(0), iron(1), bushing(3)
-		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.gear.getStack(1, 2), " N ", "NBN", " N ", 'N',
-				"ingotSteel", 'B', RailcraftItem.gear.getStack(1, 3)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.gear.getStack(EnumGear.STEEL), " N ", "NBN", " N ",
+				'N', "ingotSteel", 'B', RailcraftItem.gear.getStack(EnumGear.BUSHING)));
 
+		// new ItemStack(TFCBlocks.stoneIgEx, 1, 1) is basalt
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumMachineAlpha.PERSONAL_ANCHOR.getItem(1), "GOG", "DED", "GOG",
 				'G', "ingotGold", 'O', new ItemStack(TFCBlocks.stoneIgEx, 1, 1), 'D', "gemEmerald", 'E',
 				new ItemStack(Items.ender_pearl)));
@@ -198,20 +201,19 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumMachineBeta.VOID_CHEST.getItem(1), "BBB", "BEB", "BBB", 'B',
 				new ItemStack(TFCBlocks.stoneIgEx, 1, 1), 'E', new ItemStack(Items.ender_pearl)));
 
-		// Fixes the stone tie
-		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.tie.getStack(1, 1), " R ", "BBB", "   ", 'R',
-				RailcraftItem.rebar.getStack(), 'B',
+		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.tie.getStack(EnumTie.STONE), " R ", "BBB", "   ",
+				'R', RailcraftItem.rebar.getStack(), 'B',
 				new ItemStack(TFCItems.stoneBrick, 1, OreDictionary.WILDCARD_VALUE)));
 
 		// Controller, Receiver, Signal circuits
-		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.circuit.getStack(1, 0), " SW", "MGR", "WRL", 'S',
-				new ItemStack(Items.repeater), 'W', new ItemStack(TFCItems.woolCloth), 'M',
+		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.circuit.getStack(EnumCircuit.CONTROLLER), " SW",
+				"MGR", "WRL", 'S', new ItemStack(Items.repeater), 'W', new ItemStack(TFCItems.woolCloth), 'M',
 				new ItemStack(TFCItems.mortar), 'G', "ingotGold", 'R', new ItemStack(Items.redstone), 'L', "dyeBlue"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.circuit.getStack(1, 1), " SW", "MGR", "WRL", 'S',
-				new ItemStack(Items.repeater), 'W', new ItemStack(TFCItems.burlapCloth), 'M',
+		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.circuit.getStack(EnumCircuit.RECEIVER), " SW",
+				"MGR", "WRL", 'S', new ItemStack(Items.repeater), 'W', new ItemStack(TFCItems.burlapCloth), 'M',
 				new ItemStack(TFCItems.mortar), 'G', "ingotGold", 'R', new ItemStack(Items.redstone), 'L', "dyeBlue"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.circuit.getStack(1, 2), " SW", "MGR", "WRL", 'S',
-				new ItemStack(Items.repeater), 'W', new ItemStack(TFCItems.silkCloth), 'M',
+		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftItem.circuit.getStack(EnumCircuit.SIGNAL), " SW", "MGR",
+				"WRL", 'S', new ItemStack(Items.repeater), 'W', new ItemStack(TFCItems.silkCloth), 'M',
 				new ItemStack(TFCItems.mortar), 'G', "ingotGold", 'R', new ItemStack(Items.redstone), 'L', "dyeBlue"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(Items.comparator, " T ", "TQT", "SSS", 'T',
@@ -220,8 +222,8 @@ public class ModRecipes {
 		// Strengthened glass
 		Block railGlass = GameRegistry.findBlock("Railcraft", "glass");
 		if (railGlass != null)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(railGlass), "GIG", "GSG", "GBG", 'G', "blockGlass",
-					'I', "ingotIron", 'S', "dustSaltpeter", 'B', "bucketWater"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(railGlass, 6), "GIG", "GSG", "GBG", 'G', "blockGlassColorless",
+					'I', "ingotIron", 'S', "dyeWhite", 'B', "bucketWater"));
 
 		// Detectors
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumDetector.EMPTY.getItem(), "BBB", "BPB", "BBB", 'B',
@@ -262,7 +264,8 @@ public class ModRecipes {
 		Item railGoggles = GameRegistry.findItem("Railcraft", "armor.goggles");
 		if (railGoggles != null)
 			GameRegistry.addRecipe(new ShapedOreRecipe(railGoggles, "GRG", "I I", "LLL", 'G', "paneGlassColorless", 'R',
-					RailcraftItem.circuit.getStack(1, 1), 'I', "ingotSteel", 'L', "materialLeather"));
+					RailcraftItem.circuit.getStack(EnumCircuit.RECEIVER), 'I', "ingotSteel", 'L',
+					"materialLeather"));
 
 		// Carts
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumCart.TRACK_RELAYER.getCartItem(), "DLD", "SBS", "PCP", 'D',
@@ -291,7 +294,7 @@ public class ModRecipes {
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumCart.LOCO_ELECTRIC.getCartItem(), "LP ", "PFP", "GCG", 'L',
 				new ItemStack(TFCBlocks.oilLamp, 1, OreDictionary.WILDCARD_VALUE), 'P', "plateSteel", 'F',
-				EnumMachineEpsilon.ELECTRIC_FEEDER.getItem(), 'G', RailcraftItem.gear.getStack(1, 2), 'C',
+				EnumMachineEpsilon.ELECTRIC_FEEDER.getItem(), 'G', RailcraftItem.gear.getStack(EnumGear.STEEL), 'C',
 				EnumCart.BASIC.getCartItem()));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumCart.BORE.getCartItem(), "SMS", "FMF", " C ", 'S',
@@ -320,35 +323,36 @@ public class ModRecipes {
 				"plateSteel"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumMachineBeta.ENGINE_STEAM_LOW.getItem(), "SSS", " G ", "IPI", 'S',
-				"plateIron", 'G', "blockGlassColorless", 'I', RailcraftItem.gear.getStack(1, 1), 'P',
+				"plateIron", 'G', "blockGlassColorless", 'I', RailcraftItem.gear.getStack(EnumGear.IRON), 'P',
 				new ItemStack(Blocks.piston)));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumMachineBeta.ENGINE_STEAM_HIGH.getItem(), "SSS", " G ", "IPI",
-				'S', "plateSteel", 'G', "blockGlassColorless", 'I', RailcraftItem.gear.getStack(1, 2), 'P',
+				'S', "plateSteel", 'G', "blockGlassColorless", 'I', RailcraftItem.gear.getStack(EnumGear.STEEL), 'P',
 				new ItemStack(Blocks.piston)));
 
-		//Now i'm replaceing glowstone lamps and signal lamps with oil lamps
+		// Now i'm replacing glowstone lamps and signal lamps with oil lamps
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumTrack.LOCOMOTIVE.getItem(16), "RLR", "RTR", "RLR", 'R',
 				RailcraftItem.rail.getStack(), 'L', new ItemStack(TFCBlocks.oilLamp, 1, OreDictionary.WILDCARD_VALUE),
-				'T', RailcraftItem.railbed.getStack()));
+				'T', RailcraftItem.railbed.getStack(EnumRailbed.WOOD)));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumSignal.BLOCK_SIGNAL.getItem(), "LRI", " SI", "   ", 'I',
 				"ingotIron", 'L', new ItemStack(TFCBlocks.oilLamp, 1, OreDictionary.WILDCARD_VALUE), 'R',
-				RailcraftItem.circuit.getStack(1, 2), 'S', "dyeBlack"));
+				RailcraftItem.circuit.getStack(EnumCircuit.SIGNAL), 'S', "dyeBlack"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumSignal.DUAL_HEAD_BLOCK_SIGNAL.getItem(), "LRI", " SI", "LCI",
 				'I', "ingotIron", 'L', new ItemStack(TFCBlocks.oilLamp, 1, OreDictionary.WILDCARD_VALUE), 'R',
-				RailcraftItem.circuit.getStack(1, 2), 'S', "dyeBlack", 'C', RailcraftItem.circuit.getStack(1, 1)));
+				RailcraftItem.circuit.getStack(EnumCircuit.SIGNAL), 'S', "dyeBlack", 'C',
+				RailcraftItem.circuit.getStack(EnumCircuit.RECEIVER)));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumSignal.DISTANT_SIGNAL.getItem(), "LRI", " SI", "   ", 'I',
 				"ingotIron", 'L', new ItemStack(TFCBlocks.oilLamp, 1, OreDictionary.WILDCARD_VALUE), 'R',
-				RailcraftItem.circuit.getStack(1, 1), 'S', "dyeBlack"));
+				RailcraftItem.circuit.getStack(EnumCircuit.RECEIVER), 'S', "dyeBlack"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumSignal.DUAL_HEAD_DISTANT_SIGNAL.getItem(), "LCI", " SI", "LCI",
 				'I', "ingotIron", 'L', new ItemStack(TFCBlocks.oilLamp, 1, OreDictionary.WILDCARD_VALUE), 'S',
-				"dyeBlack", 'C', RailcraftItem.circuit.getStack(1, 1)));
+				"dyeBlack", 'C', RailcraftItem.circuit.getStack(EnumCircuit.RECEIVER)));
 
-		//Fixing plate ore dicts again
+		// Fixing plate ore dicts again
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumMachineEpsilon.ELECTRIC_FEEDER.getItem(), "PIP", "III", "PIP",
 				'P', "plateTin", 'I', "ingotCopper"));
 
@@ -363,10 +367,10 @@ public class ModRecipes {
 				'R', RailcraftItem.rebar.getStack(1)));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(EnumTrack.SLOW_BOOSTER.getItem(16), "R R", "GBG", "RDR", 'R',
-				RailcraftItem.rail.getStack(1, EnumRail.WOOD), 'G', "ingotGold", 'B', RailcraftItem.railbed.getStack(),
+				RailcraftItem.rail.getStack(EnumRail.WOOD), 'G', "ingotGold", 'B', RailcraftItem.railbed.getStack(EnumRailbed.WOOD),
 				'D', new ItemStack(Items.redstone)));
-		
-		//And switch the overalls to use wool cloth
+
+		// And switch the overalls to use wool cloth
 		GameRegistry.addRecipe(new ShapedOreRecipe(RailcraftToolItems.getOveralls(), "WWW", "WBW", "W W", 'W',
 				new ItemStack(TFCItems.woolCloth), 'B', "dyeBlue"));
 
@@ -416,8 +420,7 @@ public class ModRecipes {
 
 		disabledItems.add(EnumCart.WORK.getCartItem());
 
-		
-		//After we build the list we will traverse it
+		// After we build the list we will traverse it
 		try {
 			List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 

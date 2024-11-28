@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin.DependsOn;
 
 import com.bikereleven.tfclverailcraft.handler.ConfigurationHandler;
 import com.bikereleven.tfclverailcraft.init.ModEntities;

@@ -3,7 +3,7 @@
   "modList": [{
     "modid": "tfclverailcraft",
     "name": "TFC Railcraft",
-    "description": "A Railcraft Terrafirmacraft compatability addon",
+    "description": "A Railcraft and Terrafirmacraft compatibility addon",
     "version": "${mod_version}",
     "mcversion": "${minecraft_version}",
     "url" : "https://github.com/bikereleven/TFCRailcraft",

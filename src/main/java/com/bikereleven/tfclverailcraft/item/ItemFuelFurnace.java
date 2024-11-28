@@ -11,7 +11,7 @@ public class ItemFuelFurnace extends TLRItem {
 		setUnlocalizedName("fuelfurnace");
 		
 		maxStackSize = 1;
-		size = EnumSize.HUGE;
+		size = EnumSize.LARGE;
 		weight = EnumWeight.HEAVY;
 		
 	}
